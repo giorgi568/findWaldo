@@ -5,3 +5,9 @@
   text-align: center;
 }
 
+.target {
+  width: 30px;
+  height: 30px;
+  background-color: black;
+}
+
