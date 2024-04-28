@@ -1,4 +1,5 @@
 import styles from '../styles/game.module.css';
+import Magnifier from './Magnifier';
 
 function Game() {
   return (
@@ -13,23 +14,18 @@ function Game() {
           let y = e.clientY - rect.top;
           console.log('coordinate x: ' + x, 'coordinate y: ' + y);
 
-          const target = document.createElement('div');
-          target.classList.add('target');
+          const target = document.getElementById('target');
+          target.style.display = 'block';
           target.style.position = 'absolute';
-          target.style.left = x - 15 + 'px';
-          target.style.top = y - 15 + 'px';
-
-          setTimeout(() => {
-            console.log(target.getBoundingClientRect().width);
-          }, 0);
-
-          e.currentTarget.append(target);
+          target.style.left = x - target.offsetWidth/2 + 'px';
+          target.style.top = y - target.offsetHeight/2 + 'px';
         }}
         className={styles.container}
       >
-        <img src='/test.jpg' alt='image of waldo' className={styles.img} />
+        <img src='/test.jpg' alt='image of waldo' className={styles.img} id='img'/>
 
-        <div className={styles.target}></div>
+        <div className={styles.target} id='target'></div>
+        <Magnifier />
       </div>
     </div>
   );

@@ -5,3 +5,10 @@
   position: relative;
   overflow: hidden;
 }
+
+.target {
+  width: 30px;
+  height: 30px;
+  background-color: #000000;
+  display: none;
+}

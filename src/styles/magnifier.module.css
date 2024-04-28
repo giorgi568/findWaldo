@@ -1,0 +1,13 @@
+
+.result {
+  border: 1px solid #d4d4d4;
+  width: 300px;
+  height: 300px;
+}
+.lens{
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  width: 40px;
+  height: 40px;
+  /* display: none; */
+}
