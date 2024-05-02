@@ -1,15 +1,22 @@
+import { useEffect } from 'react';
 import styles from '../styles/magnifier.module.css';
 
 function Magnifier() {
-  let img, lens, result, cx, cy;
-
-  document.addEventListener('DOMContentLoaded', () => {
+  useEffect(() => {
+    let img, lens, result, cx, cy;
+    lens = document.getElementById('lens');
     img = document.getElementById('img');
     result = document.getElementById('result');
-    lens = document.getElementById('lens');
 
-    cx = result.offsetWidth / lens.offsetWidth;
-    cy = result.offsetHeight / lens.offsetHeight;
+    if (!lens) {
+      lens = document.createElement('DIV');
+      lens.setAttribute('id', 'lens');
+      lens.classList.add(styles.lens);
+      img.parentElement.insertBefore(lens, img);
+    }
+
+    cx = result.offsetWidth / lens.offsetWidth / 2;
+    cy = result.offsetHeight / lens.offsetHeight / 2;
 
     result.style.backgroundImage = `url('${img.src}')`;
     result.style.backgroundSize =
@@ -19,8 +26,16 @@ function Magnifier() {
       let x, y;
       e.preventDefault();
 
-      x = e.clientX - lens.offsetWidth / 2;
-      y = e.clientY - lens.offsetHeight / 2;
+      x =
+        e.pageX -
+        lens.offsetWidth / 2 -
+        img.getBoundingClientRect().left -
+        window.scrollX;
+      y =
+        e.pageY -
+        lens.offsetHeight / 2 -
+        img.getBoundingClientRect().top -
+        window.scrollY;
 
       if (x > img.width - lens.offsetWidth) {
         x = img.width - lens.offsetWidth;
@@ -38,6 +53,17 @@ function Magnifier() {
       lens.style.left = x + 'px';
       lens.style.top = y + 'px';
 
+      if (x + result.offsetWidth > img.width) {
+        result.style.left = x - result.offsetWidth + 'px';
+      } else {
+        result.style.left = x + 60 + 'px';
+      }
+      if(y + result.offsetHeight > img.height){
+        result.style.top = y - result.offsetHeight + 'px';
+      }else{
+        result.style.top = y + 60 + 'px';
+      }
+
       result.style.backgroundPosition = `-${x * cx}px -${y * cy}px`;
     }
 
@@ -45,13 +71,7 @@ function Magnifier() {
     img.addEventListener('mousemove', moveLens);
   });
 
-  return (
-    <div>
-      <p>not implemented</p>
-      <div id='result' className={styles.result}></div>
-      <div id='lens' className={styles.lens}></div>
-    </div>
-  );
+  return <div id='result' className={styles.result}></div>;
 }
 
 export default Magnifier;
