@@ -15,8 +15,8 @@ function Magnifier() {
       img.parentElement.insertBefore(lens, img);
     }
 
-    cx = result.offsetWidth / lens.offsetWidth / 2;
-    cy = result.offsetHeight / lens.offsetHeight / 2;
+    cx = result.offsetWidth / lens.offsetWidth ;
+    cy = result.offsetHeight / lens.offsetHeight ;
 
     result.style.backgroundImage = `url('${img.src}')`;
     result.style.backgroundSize =
@@ -53,15 +53,15 @@ function Magnifier() {
       lens.style.left = x + 'px';
       lens.style.top = y + 'px';
 
-      if (x + result.offsetWidth > img.width) {
+      if ((x + result.offsetWidth + lens.offsetWidth) > img.offsetWidth) {
         result.style.left = x - result.offsetWidth + 'px';
       } else {
-        result.style.left = x + 60 + 'px';
+        result.style.left = x + lens.offsetWidth + 'px';
       }
-      if(y + result.offsetHeight > img.height){
+      if((y + result.offsetHeight + lens.offsetHeight) > img.height){
         result.style.top = y - result.offsetHeight + 'px';
       }else{
-        result.style.top = y + 60 + 'px';
+        result.style.top = y + lens.offsetHeight + 'px';
       }
 
       result.style.backgroundPosition = `-${x * cx}px -${y * cy}px`;

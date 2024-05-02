@@ -1,8 +1,4 @@
 
-/* .container{
-  position: absolute;
-} */
-
 .result {
   border: 1px solid #d4d4d4;
   width: 300px;
@@ -14,7 +10,6 @@
 .lens{
   position: absolute;
   border: 1px solid #d4d4d4;
-  width: 60px;
-  height: 60px;
-  /* display: none; */
+  width: 100px;
+  height: 100px;
 }

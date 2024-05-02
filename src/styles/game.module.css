@@ -1,14 +1,15 @@
 .img {
   width: 100%;
 }
-.container{
+.container {
   position: relative;
   overflow: hidden;
+  cursor: crosshair;
 }
 
 .target {
   width: 30px;
   height: 30px;
-  background-color: #000000;
   display: none;
+  border: 2px solid green;
 }
