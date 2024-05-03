@@ -4,8 +4,8 @@
   width: 300px;
   height: 300px;
   position: absolute;
-  /* background-repeat: no-repeat; */
   background-repeat: space;
+  box-shadow: 0px 0px 10px 10px #888181;
 }
 .lens{
   position: absolute;

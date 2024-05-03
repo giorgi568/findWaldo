@@ -13,3 +13,21 @@
   display: none;
   border: 2px solid green;
 }
+.options{
+  border: 1px solid red;
+  width: fit-content;
+  padding: 5px 20px;
+  display: flex;
+  gap: 20px;
+  border-radius: 0.8rem;
+  position: absolute;
+  cursor: pointer;
+  background-color: white;
+}
+.profileImg{
+  height: 40px;
+}
+.profileImg:hover{
+  border: 1px solid blue;
+  border-radius: 5px;
+}
