@@ -21,7 +21,10 @@ function Game() {
           let rect = e.currentTarget.getBoundingClientRect();
           let x = e.clientX - rect.left;
           let y = e.clientY - rect.top;
-          console.log('coordinate x: ' + x, 'coordinate y: ' + y);
+          console.log(
+            'coordinate x: ' + (x * 1200) / rect.width,
+            'coordinate y: ' + (y * 1200) / rect.width
+          );
 
           const target = document.getElementById('target');
           target.style.display = 'block';
@@ -45,7 +48,7 @@ function Game() {
         className={styles.container}
       >
         <img
-          src='/test3.jpg'
+          src='/test2.jpg'
           alt='image of waldo'
           className={styles.img}
           id='img'
