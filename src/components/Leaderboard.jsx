@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from '../styles/leaderboard.module.css';
-import Loading from '../components/Loading';
+import Loading from './Loading';
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState(false);
