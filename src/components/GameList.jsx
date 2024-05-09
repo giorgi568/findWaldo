@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
 import styles from '../styles/gameList.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function GameList() {
   const [images, setImages] = useState(false);
+  const navigate = useNavigate();
 
   const getImages = async () => {
     try {
@@ -24,7 +26,11 @@ function GameList() {
       {images ? (
         images.map((image, index) => {
           return (
-            <div key={index} className={styles.container}>
+            <div
+              key={index}
+              className={styles.container}
+              onClick={() => navigate(`/game/${image._id}`)}
+            >
               <img src={image.url} alt='image' className={styles.img} />
               <div className={styles.wrapper}>
                 <p>{image.title}</p>

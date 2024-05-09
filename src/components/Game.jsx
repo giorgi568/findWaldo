@@ -1,12 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/game.module.css';
 import Magnifier from './Magnifier';
+import { useParams } from 'react-router-dom';
 
 function Game() {
   const [showMagnifier, letShowMagnifier] = useState(false);
+  const [image, setimage] = useState(false);
+  const { id } = useParams();
+  let guessX, guessY;
+
+  useEffect(() => {
+    async function getImage() {
+      try {
+        let res = await fetch(
+          `https://quaint-grave-woolen.glitch.me/image/${id}`
+        );
+        res = await res.json();
+        setimage(res.image);
+        console.log(res.image);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getImage();
+  }, [id]);
   return (
     <div>
-      <p>click on the waldo to win</p>
+      {image.cordX_wenda ? (
+        <p>Find Waldo And Wenda To Win</p>
+      ) : (
+        <p>Find Waldo To Win</p>
+      )}
       <button
         onClick={() => {
           letShowMagnifier(!showMagnifier);
@@ -25,6 +49,8 @@ function Game() {
             'coordinate x: ' + (x * 1200) / rect.width,
             'coordinate y: ' + (y * 1200) / rect.width
           );
+          guessX = Math.floor((x * 1200) / rect.width);
+          guessY = Math.floor((y * 1200) / rect.width);
 
           const target = document.getElementById('target');
           target.style.display = 'block';
@@ -48,7 +74,7 @@ function Game() {
         className={styles.container}
       >
         <img
-          src='/test2.jpg'
+          src={image.url}
           alt='image of waldo'
           className={styles.img}
           id='img'
@@ -61,7 +87,23 @@ function Game() {
           }}
         >
           <span>
-            <img src='/waldo.png' alt='waldo' className={styles.profileImg} />
+            <img
+              src='/waldo.png'
+              alt='waldo'
+              className={styles.profileImg}
+              onClick={async () => {
+                try {
+                  console.log(guessX, guessY)
+                  let res = await fetch(
+                    `https://quaint-grave-woolen.glitch.me/found_waldo/${id}?x=${guessX}&y=${guessY}`
+                  );
+                  res = await res.json();
+                  console.log(res);
+                } catch (err) {
+                  console.log(err);
+                }
+              }}
+            />
           </span>{' '}
           <span>
             <img src='/wenda.jpg' alt='wenda' className={styles.profileImg} />

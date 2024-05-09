@@ -6,7 +6,7 @@ const Router = () => {
   const router = createBrowserRouter([
     { path: '/', element: <App /> },
     {
-      path: '/game',
+      path: '/game/:id',
       element: <Game />,
     },
   ]);
