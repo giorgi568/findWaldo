@@ -5,7 +5,7 @@ import GameList from './components/GameList';
 function App() {
   return (
     <>
-      <div>
+      <div className='content'>
         <h1>Lets Find Waldo</h1>
         <Leaderboard />
         <GameList />

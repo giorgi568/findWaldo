@@ -20,7 +20,7 @@ function Leaderboard() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h3>Leaders Are:</h3>
       <ul className={styles.ul}>
         {leaderboard ? (

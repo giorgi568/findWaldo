@@ -8,3 +8,7 @@
   gap: 10px;
   padding: 0;
 }
+.container {
+  max-width: 500px;
+  min-width: 350px;
+}
