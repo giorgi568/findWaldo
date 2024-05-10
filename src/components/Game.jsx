@@ -8,6 +8,15 @@ function Game() {
   const [image, setimage] = useState(false);
   const { id } = useParams();
   let guessX, guessY;
+  const [waldoFound, setWaldoFound] = useState(false);
+  const [wendaFound, setWendaFound] = useState(false);
+  const [won, setWon] = useState(false);
+
+  // let time = 0;
+  // const intervalId = setInterval(() => {
+  //   time = time + 1;
+  //   console.log(time);
+  // }, 1000);
 
   useEffect(() => {
     async function getImage() {
@@ -17,13 +26,25 @@ function Game() {
         );
         res = await res.json();
         setimage(res.image);
+        if (!res.image.cordX_wenda) {
+          setWendaFound(true);
+        }
         console.log(res.image);
       } catch (err) {
         console.log(err);
       }
     }
     getImage();
-  }, [id]);
+
+    if (waldoFound && wendaFound) {
+      setWon(true);
+    }
+  }, [id, waldoFound, wendaFound]);
+  console.log(1);
+  if (won) {
+    // clearInterval(intervalId);
+    return <h1>Congragulations, {time}</h1>;
+  }
   return (
     <div>
       {image.cordX_wenda ? (
@@ -38,6 +59,9 @@ function Game() {
       >
         Toggle Magnifier
       </button>
+
+      <div></div>
+
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -45,10 +69,10 @@ function Game() {
           let rect = e.currentTarget.getBoundingClientRect();
           let x = e.clientX - rect.left;
           let y = e.clientY - rect.top;
-          console.log(
-            'coordinate x: ' + (x * 1200) / rect.width,
-            'coordinate y: ' + (y * 1200) / rect.width
-          );
+          // console.log(
+          //   'coordinate x: ' + (x * 1200) / rect.width,
+          //   'coordinate y: ' + (y * 1200) / rect.width
+          // );
           guessX = Math.floor((x * 1200) / rect.width);
           guessY = Math.floor((y * 1200) / rect.width);
 
@@ -93,12 +117,14 @@ function Game() {
               className={styles.profileImg}
               onClick={async () => {
                 try {
-                  console.log(guessX, guessY)
+                  // console.log(guessX, guessY);
                   let res = await fetch(
                     `https://quaint-grave-woolen.glitch.me/found_waldo/${id}?x=${guessX}&y=${guessY}`
                   );
                   res = await res.json();
-                  console.log(res);
+                  if (res.found === true) {
+                    setWaldoFound(true);
+                  }
                 } catch (err) {
                   console.log(err);
                 }
@@ -106,7 +132,24 @@ function Game() {
             />
           </span>{' '}
           <span>
-            <img src='/wenda.jpg' alt='wenda' className={styles.profileImg} />
+            <img
+              src='/wenda.jpg'
+              alt='wenda'
+              className={styles.profileImg}
+              onClick={async () => {
+                try {
+                  let res = await fetch(
+                    `https://quaint-grave-woolen.glitch.me/found_wenda/${id}?x=${guessX}&y=${guessY}`
+                  );
+                  res = await res.json();
+                  if (res.found === true) {
+                    setWendaFound(true);
+                  }
+                } catch (err) {
+                  console.log(err);
+                }
+              }}
+            />
           </span>
         </div>
 
