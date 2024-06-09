@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/game.module.css';
 import Magnifier from './Magnifier';
+import Timer from './Timer';
 import { useParams } from 'react-router-dom';
 
 function Game() {
@@ -11,12 +12,6 @@ function Game() {
   const [waldoFound, setWaldoFound] = useState(false);
   const [wendaFound, setWendaFound] = useState(false);
   const [won, setWon] = useState(false);
-
-  // let time = 0;
-  // const intervalId = setInterval(() => {
-  //   time = time + 1;
-  //   console.log(time);
-  // }, 1000);
 
   useEffect(() => {
     async function getImage() {
@@ -35,16 +30,18 @@ function Game() {
       }
     }
     getImage();
+  }, [id]);
 
+  useEffect(() => {
     if (waldoFound && wendaFound) {
       setWon(true);
     }
-  }, [id, waldoFound, wendaFound]);
-  console.log(1);
-  if (won) {
-    // clearInterval(intervalId);
-    return <h1>Congragulations, {time}</h1>;
-  }
+  }, [waldoFound, wendaFound]);
+
+  console.log( waldoFound, wendaFound);
+  // if (won) {
+  //   return <h1>Congragulations your time was {time} seconds</h1>;
+  // }
   return (
     <div>
       {image.cordX_wenda ? (
@@ -60,7 +57,9 @@ function Game() {
         Toggle Magnifier
       </button>
 
-      <div></div>
+      <div>
+        <Timer won={won}/>
+      </div>
 
       <div
         onClick={(e) => {

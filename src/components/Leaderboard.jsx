@@ -27,7 +27,7 @@ function Leaderboard() {
           leaderboard.map((player, index) => {
             return (
               <li key={index} className={styles.li}>
-                <span>{player.name}</span> <span>{player.time}</span>
+                <span>{player.name}</span> <span>{player.time}s</span>
               </li>
             );
           })
