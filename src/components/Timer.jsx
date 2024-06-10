@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 function Timer({ won }) {
   const [time, setTime] = useState(0);
   const [worstTime, setWorstTime] = useState(false);
+  const [player, setPlayer] = useState(false);
   const navigate = useNavigate();
-
   const getWorstTime = async () => {
     try {
       let res = await fetch('https://quaint-grave-woolen.glitch.me/players');
@@ -46,8 +46,33 @@ function Timer({ won }) {
             <p>You did it in {time} seconds</p>
             <p>You got place in leaderboard</p>
             <p>please enter your name</p>
-            <input type='text' />
-            <button onClick={() => navigate('/')}>Enter</button>
+            <input type='text' onInput={(e) => setPlayer(e.target.value)} />
+            <button
+              onClick={async () => {
+                try {
+                  const response = await fetch(
+                    'https://quaint-grave-woolen.glitch.me/player_add',
+                    {
+                      method: 'POST',
+                      mode: 'cors',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ name: player, time: time }),
+                      redirect: 'follow',
+                      referrerPolicy: 'no-referrer',
+                    }
+                  );
+                  console.log(response, 2222);
+                } catch (err) {
+                  console.log(err);
+                } finally {
+                  navigate('/');
+                }
+              }}
+            >
+              Enter
+            </button>
           </div>
         </div>
       );
