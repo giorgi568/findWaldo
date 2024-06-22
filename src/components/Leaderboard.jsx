@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from '../styles/leaderboard.module.css';
 import Loading from './Loading';
+import getFormattedTime from '../assets/getFormattedTime';
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState(false);
@@ -20,21 +21,26 @@ function Leaderboard() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h3>Leaders Are:</h3>
-      <ul className={styles.ul}>
-        {leaderboard ? (
-          leaderboard.map((player, index) => {
-            return (
-              <li key={index} className={styles.li}>
-                <span>{player.name}</span> <span>{player.time}s</span>
-              </li>
-            );
-          })
-        ) : (
-          <Loading />
-        )}
-      </ul>
+    <div className={styles.wrapper}>
+      <img src='peeking.png' alt='peek' className={styles.img} />
+      <div className={styles.container}>
+        <h3>Leaderboard</h3>
+        <ul className={styles.ul}>
+          {leaderboard ? (
+            leaderboard.map((player, index) => {
+              return (
+                <li key={index} className={styles.li}>
+                  <span>{player.name}</span>
+                  <hr className={styles.dottedLine} />
+                  <span>{getFormattedTime(player.time)}</span>
+                </li>
+              );
+            })
+          ) : (
+            <Loading />
+          )}
+        </ul>
+      </div>
     </div>
   );
 }

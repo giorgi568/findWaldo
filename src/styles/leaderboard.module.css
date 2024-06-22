@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
 }
-.ul{
+.ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -11,4 +11,32 @@
 .container {
   max-width: 500px;
   min-width: 350px;
+  color: #ededed;
+  background-color: #2E2E2E;
+  padding: 10px 60px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 10;
+}
+.wrapper{
+  position: relative;
+}
+.dottedLine {
+  border: none;
+  border-top: 4px dotted #DA0037;
+  flex-grow: 1;
+  align-self: center;
+  margin: 0px 15px;
+  margin-top: 3px;
+}
+.img{
+  position: absolute;
+  width: 80px;
+  left: -80px;
+  top: 5px;
+  transition: padding 0.5s ease-in-out;
+  z-index: 5;
+}
+.img:hover{
+  padding-left: 80px;
 }
