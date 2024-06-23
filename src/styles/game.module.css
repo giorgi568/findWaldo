@@ -31,3 +31,10 @@
   border: 1px solid blue;
   border-radius: 5px;
 }
+.hi{
+  height: 150px;
+  margin-top: 20px;
+}
+.content > p{
+  margin: 0;
+}

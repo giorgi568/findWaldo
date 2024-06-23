@@ -38,12 +38,13 @@ function Game() {
     }
   }, [waldoFound, wendaFound]);
 
-  console.log( waldoFound, wendaFound);
+  console.log(waldoFound, wendaFound);
   // if (won) {
   //   return <h1>Congragulations your time was {time} seconds</h1>;
   // }
   return (
-    <div>
+    <div className={styles.content}>
+      <img src='/hi.png' alt='hi' className={styles.hi} />
       {image.cordX_wenda ? (
         <p>Find Waldo And Wenda To Win</p>
       ) : (
@@ -58,7 +59,7 @@ function Game() {
       </button>
 
       <div>
-        <Timer won={won}/>
+        <Timer won={won} />
       </div>
 
       <div

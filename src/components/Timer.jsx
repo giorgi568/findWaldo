@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/timer.module.css';
 import { useNavigate } from 'react-router-dom';
+import getFormattedTime from '../assets/getFormattedTime';
 
 function Timer({ won }) {
   const [time, setTime] = useState(0);
@@ -88,7 +89,7 @@ function Timer({ won }) {
       );
     }
   }
-  return <span>Time: {time} seconds</span>;
+  return <span>Time: {getFormattedTime(time)} seconds</span>;
 }
 
 Timer.propTypes = {

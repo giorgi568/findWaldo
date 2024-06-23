@@ -31,6 +31,7 @@ function GameList() {
               className={styles.container}
               onClick={() => navigate(`/game/${image._id}`)}
             >
+              <div className={styles.label}>Click To Play</div>
               <img src={image.url} alt='image' className={styles.img} />
               <div className={styles.wrapper}>
                 <p>{image.title}</p>
