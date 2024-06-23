@@ -89,7 +89,7 @@ function Timer({ won }) {
       );
     }
   }
-  return <span>Time: {getFormattedTime(time)} seconds</span>;
+  return <span className={styles.timer}>{getFormattedTime(time)}</span>;
 }
 
 Timer.propTypes = {

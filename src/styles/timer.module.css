@@ -36,3 +36,11 @@
   font-size: 1.8rem;
   font-weight: 400;
 }
+.timer{
+  background-color: #EDEDED;
+  padding: 1px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 3px;
+}
