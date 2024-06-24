@@ -13,7 +13,6 @@ function Timer({ won }) {
     try {
       let res = await fetch('https://quaint-grave-woolen.glitch.me/players');
       res = await res.json();
-      console.log(res.players[res.players.length - 1].time);
       const worst = res.players[res.players.length - 1].time;
       setWorstTime(worst);
     } catch (err) {
@@ -44,36 +43,51 @@ function Timer({ won }) {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <h3>Congragulations!</h3>
-            <p>You did it in {time} seconds</p>
-            <p>You got place in leaderboard</p>
+            <p>You did it in {getFormattedTime(time)}</p>
+            <p>You got place in the leaderboard</p>
             <p>please enter your name</p>
-            <input type='text' onInput={(e) => setPlayer(e.target.value)} />
-            <button
-              onClick={async () => {
-                try {
-                  const response = await fetch(
-                    'https://quaint-grave-woolen.glitch.me/player_add',
-                    {
-                      method: 'POST',
-                      mode: 'cors',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({ name: player, time: time }),
-                      redirect: 'follow',
-                      referrerPolicy: 'no-referrer',
+            <form action='#'>
+              <input
+                type='text'
+                onInput={(e) => setPlayer(e.target.value)}
+                minLength={1}
+                placeholder='name'
+              />
+              <button
+                type='button'
+                className={styles.btn}
+                onClick={async () => {
+                  try {
+                    if (player) {
+                      await fetch(
+                        'https://quaint-grave-woolen.glitch.me/player_add',
+                        {
+                          method: 'POST',
+                          mode: 'cors',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ name: player, time: time }),
+                          redirect: 'follow',
+                          referrerPolicy: 'no-referrer',
+                        }
+                      );
+                      navigate('/');
                     }
-                  );
-                  console.log(response, 2222);
-                } catch (err) {
-                  console.log(err);
-                } finally {
-                  navigate('/');
-                }
-              }}
-            >
-              Enter
-            </button>
+                  } catch (err) {
+                    console.log(err);
+                  }
+                }}
+              >
+                Enter
+              </button>
+            </form>
+            <span>
+              <hr />
+              OR
+              <hr />
+            </span>
+            <button onClick={() => navigate('/')}>Go To Homepage</button>
           </div>
         </div>
       );

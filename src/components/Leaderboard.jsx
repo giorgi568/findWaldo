@@ -10,7 +10,6 @@ function Leaderboard() {
     try {
       let res = await fetch('https://quaint-grave-woolen.glitch.me/players');
       res = await res.json();
-      console.log(res.players);
       setLeaderboard(res.players);
     } catch (err) {
       console.log(err);
