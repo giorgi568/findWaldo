@@ -36,3 +36,9 @@
   border-radius: 10px;
   font-size: 1.2rem;
 }
+
+@media (max-width: 600px) {
+ .content{
+  /* max-width: 200px; */
+ } 
+}

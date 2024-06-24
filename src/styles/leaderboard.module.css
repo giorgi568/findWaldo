@@ -41,3 +41,10 @@
 .img:hover{
   padding-left: 80px;
 }
+
+@media (max-width: 600px) {
+ .container{
+  min-width: 50vw;
+  padding: 1rem;
+ } 
+}
