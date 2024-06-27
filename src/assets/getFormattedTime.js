@@ -4,7 +4,7 @@ export default function getFormattedTime(time) {
 
   if (minutes < 10 && seconds < 10) {
     return `0${minutes}:0${seconds}`;
-  } else if (minutes < 10 && seconds > 10) {
+  } else if (minutes < 10 && seconds >= 10) {
     return `0${minutes}:${seconds}`;
   } else if (minutes >= 10 && seconds < 10) {
     return `${minutes}:0${seconds}`;
